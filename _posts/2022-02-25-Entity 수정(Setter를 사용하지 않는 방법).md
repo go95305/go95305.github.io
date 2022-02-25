@@ -22,8 +22,14 @@ boardRepository.save("엔티티")를 통해 DB에 존재하는 컬럼값을 수�
 </p>
 
 <br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 
+
+### Entity에 Setter를 두지않는 이유?
 
 **Entity에 Setter를 두게 되면 일관성을 유지하기 힘들어 위험하기 때문이다.**
 
