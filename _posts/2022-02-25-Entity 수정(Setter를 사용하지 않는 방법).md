@@ -1,4 +1,3 @@
-
 ---
 layout: single
 title:  "Entity 수정(Setter를 사용하지 않는 방법)"
