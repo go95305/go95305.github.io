@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "[Design Pattern] Proxy Pattern"
+category:
+  - Design Pattern
 ---
 
 ### Proxy Pattern이란?

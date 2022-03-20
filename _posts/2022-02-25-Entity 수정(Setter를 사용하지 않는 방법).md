@@ -1,6 +1,8 @@
 ---
 layout: single
 title:  "Entity 수정(Setter를 사용하지 않는 방법)"
+category:
+  - JPA
 ---
 
 boardRepository.save("엔티티")를 통해 DB에 존재하는 컬럼값을 수정할 수 있습니다.
