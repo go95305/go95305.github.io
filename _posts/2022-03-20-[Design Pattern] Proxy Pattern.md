@@ -22,29 +22,60 @@ Proxy 패턴을 간단한 예제로 구현해 보았다.
 
 - review
   - 댓글을 다는 기능이 담긴 Interface
+    <br/>
+
+~~~java
+public interface Review {
+    void writeReview();
+}
+~~~
+
+<br/>
+
 - pos
   - review Interface를 상속받아서 실질적인 댓글작성 기능을 수행하는 원래 객체(real class)
+
+~~~java
+public class Pos implements Review {
+  
+  private final String REVIEW = "WRITE REVIEW";
+
+  @Override
+  public void writeReview() {
+    System.out.println(REVIEW);
+  }
+}
+~~~
+<br/>
+
 - proxy
   - pos 대신 댓글 작성을 해주는 proxy class
 
-<p align="center">
-    <img src="/images/proxy/review_interface.png" width="50%" class="image__border">
-</p>
+~~~java
+public class Proxy implements Review {
+    Review review = new Pos();
+
+    @Override
+    public void writeReview() {
+        review.writeReview();
+    }
+}
+~~~
+
 <br/>
-<p align="center">
-    <img src="/images/proxy/pos.png" width="50%" class="image__border">
-</p>
-<br/>
-<p align="center">
-    <img src="/images/proxy/proxy.png" width="50%" class="image__border">
-</p>
-<br/>
-<p align="center">
-    <img src="/images/proxy/main.png" width="50%" class="image__border">
-</p>
+
 
 main에서 pos객체를 직접 호출하는 것이아니라 proxy를 통해 '대신' 댓글작성 기능을 수행하는 것이다.
 proxy 클래스를 보면 댓글작성기능이 있는 Review Interface를 상속받은 Pos가 구현되어있는것을 확인할 수 있다.
+
+~~~java
+public class Main {
+    public static void main(String[] args) {
+        Review review = new Proxy();
+        review.writeReview();
+    }
+}
+~~~
 
 
 
