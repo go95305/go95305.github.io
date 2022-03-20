@@ -5,6 +5,8 @@ category:
   - Design Pattern
 ---
 
+<br/>
+
 ### Proxy Pattern이란?
 Proxy객체란 원래 객체(real class)를 대신 구현해준다고 생각하면된다. 직접적으로 원래 객체를 구현하기 보다는 Proxy class 내부에 원래 객체(class)를 선언하면서 Proxy Pattern을 구현할 수 있다.
 
