@@ -35,8 +35,12 @@ Proxy 패턴을 간단한 예제로 구현해 보았다.
     <img src="/images/proxy/proxy.png" width="50%" class="image__border">
 </p>
 <br/>
+<p align="center">
+    <img src="/images/proxy/main.png" width="50%" class="image__border">
+</p>
 
-
+main에서 pos객체를 직접 호출하는 것이아니라 proxy를 통해 '대신' 댓글작성 기능을 수행하는 것이다.
+proxy 클래스를 보면 댓글작성기능이 있는 Review Interface를 상속받은 Pos가 구현되어있는것을 확인할 수 있다.
 
 
 
