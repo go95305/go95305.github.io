@@ -76,7 +76,6 @@ bing_site_verification   :
 naver_site_verification  :
 yandex_site_verification :
 baidu_site_verification  :
-
 # Social Sharing
 twitter:
   username               :
@@ -94,8 +93,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : false # false (default), "google", "google-universal", "google-gtag", "custom"
-  google:
+  provider               : "google-gtag"
+                            # false (default), "google", "google-universal", "google-gtag", "custom"
+  google                 : "G-RGDK3WR9R4"
     tracking_id          :
     anonymize_ip         : # true, false (default)
 
