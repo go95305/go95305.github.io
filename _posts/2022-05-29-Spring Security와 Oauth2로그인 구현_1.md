@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Spring Security와 Oauth2 로그인(Google)"
+title:  "Spring Security와 Oauth2 로그인(Google)-1"
 category:
 - Spring
 - Spring Security
@@ -113,7 +113,14 @@ app:
 <br/>
 
 #### 2-1 SecurityConfig
-`authorizeRequest().antMatchers(~~):`antMatchers에 포함되는 요청들은 모두 인증과정이 필요.
+- `.authorizeRequest().antMatchers(~~):`antMatchers에 포함되는 요청들은 모두 인증과정이 필요.
+- `.authorizationEndpoint()`: Client단에서 보낸 GET요청을 토대로 인증을 진행할 수 있는 화면으로 redirect한다. (`https://accounts.google.com/o/oauth2/auth`이 인증요청을 받아들이는 URL이므로 이 URL을 Client단에 보여준다)
+- `.redirectionEndpoint()`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`.baseUri("/oauth2/callback/*")`: 인증 서버에서 받아온 Authorization Code를 가져와 보내줄 URL설정(이정보들을 그대로 Client에게 보내주지않고 Server단에서 JWT토큰을 생성하고 그 토큰을 보내준다.)
+- `.userInfoEndpoint()`<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`.userService(customOAuth2UserService)`: Google에서 사용자 정보를 가져와서 DB에 유저 정보를 생성하거나 업데이트한다. 그리고 authorization code를 통해 Access token을 발급받는다.
+- `.successHandler(oAuth2AuthenticationSuccessHandler)`: Access Token을 성공적으로 받아왔으면 실행
+- `.failureHandler(oAuth2AuthenticationFailureHandler)`:  Authorization code 받가오기 실패했으면 실행
 
 ~~~java
 package com.board.config.auth;
@@ -177,7 +184,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 ~~~
 
+<br/>
 
+이번 글 에서는 Spring Security에 대한 설정은 여기까지만 보고 다음 글부터는 각 Service, Handler, Repository등 세부적인 설정을 확인하겠다. 
 
+<br/>
+
+### REFER TO
+- <https://deeplify.dev/back-end/spring/oauth2-social-login#%EC%A0%84%EC%B2%B4-%EC%8B%9C%ED%80%80%EC%8A%A4-%EB%8B%A4%EC%9D%B4%EC%96%B4%EA%B7%B8%EB%9E%A8>
+- <https://jyami.tistory.com/121>
 
 
