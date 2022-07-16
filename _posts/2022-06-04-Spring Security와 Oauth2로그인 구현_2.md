@@ -96,14 +96,50 @@ private boolean isAuthorizedRedirectUri(String uri) {
         URI clientRedirectUri = URI.create(uri);
 
         return appProperties.getOauth2().getAuthorizedRedirectUris()
-                .stream()
-                .anyMatch(authorizedRedirectUri -> {
-                    // Only validate host and port. Let the clients use different paths if they want to
-                    URI authorizedURI = URI.create(authorizedRedirectUri);
-                    return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
-                            && authorizedURI.getPort() == clientRedirectUri.getPort();
-                });
-    }
+  .stream()
+  .anyMatch(authorizedRedirectUri->{
+  // Only validate host and port. Let the clients use different paths if they want to
+  URI authorizedURI=URI.create(authorizedRedirectUri);
+  return authorizedURI.getHost().equalsIgnoreCase(clientRedirectUri.getHost())
+  &&authorizedURI.getPort()==clientRedirectUri.getPort();
+  });
+  }
 ~~~
 
+<br/>
 
+이제 직접 로그인과 JWT토큰이 만들어지는 과정을 화면을 통해 확인해보겠다.
+
+<p align="center">
+    <img src="/images/login.png" width="100%" class="image__border">
+</p>
+
+로그인을 눌러주면 구글 로그인 화면으로 이동된다.
+
+<p align="center">
+    <img src="/images/google_login.png" width="100%" class="image__border">
+</p>
+
+구글 계정을 선택한다.
+
+<p align="center">
+    <img src="/images/developer_mode.png" width="100%" class="image__border">
+</p>
+
+로그인 후, 개발자모드를 열어서 확인해보면 성공적으로 JWT 토큰이 만들어져서 Client쪽으로 보내진것을 확인할 수 있다.
+
+<br/>
+
+### 로그아웃?
+
+결론부터 말하면 form login을 통한 커스텀 로그인이 아니고 구글, 카카오 등과 같은 oauth2 로그인을 구현한 경우 로그아웃이라는 개념이 따로없다. 물론 구글의 로그아웃은 있지만 현재 구글 로그인을 사용한
+프로젝트의 로그아웃이 없다는 뜻이다. 관련 글을 Stacfk Overflow를 통해 확인할 수 있었다.
+
+> *When you logout of your app, you're logging out of your app:
+Here's where developers new to OAuth sometimes get a little confused... Google and Stack Overflow, Assembla, Vinesh's-very-cool-slick-webapp, are all different entities, and Google knows nothing about your account on Vinesh's cool webapp, and vice versa, aside from what's exposed via the API you're using to access profile information. When your user logs out, he or she isn't logging out of Google, he/she is logging out of your app, or Stack Overflow, or Assembla, or whatever web application used Google OAuth to authenticate the user. In fact, I can log out of all of my Google accounts and still be logged into Stack Overflow. Once your app knows who the user is, that person can log out of Google. Google is no longer needed. With that said, what you're asking to do is log the user out of a service that really doesn't belong to you. Think about it like this: As a user, how annoyed do you think I would be if I logged into 5 different services with my Google account, then the first time I logged out of one of them, I have to login to my Gmail account again because that app developer decided that, when I log out of his application, I should also be logged out of Google? That's going to get old really fast. In short, you really don't want to do this...*
+
+우리가 Youtube를 이용하다가 로그아웃을 하면 Youtube만 로그아웃할 수 있는게 아니라 구글 자체를 로그아웃하는 것이 적절한 예시인거 같다.
+
+### REFER TO
+
+- <https://stackoverflow.com/questions/12909332/how-to-logout-of-an-application-where-i-used-oauth2-to-login-with-google>
